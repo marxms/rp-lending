@@ -1,0 +1,6 @@
+applicationType: default
+defaultPackage: com.rp
+testFramework: junit
+sourceLanguage: java
+buildTool: maven
+features: [app-name, data, data-jpa, http-client-test, jackson-databind, java, java-application, jdbc-hikari, junit, logback, lombok, maven, maven-enforcer-plugin, micronaut-aot, micronaut-http-validation, netty-server, openapi, postgres, properties, readme, shade, static-resources, swagger-ui, test-resources]
