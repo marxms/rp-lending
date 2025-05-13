@@ -16,7 +16,7 @@ import java.util.Date;
 public class Transfer {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(generator = "transfer_id_increment", strategy = GenerationType.AUTO)
     private Long id;
 
     private String transactionID;

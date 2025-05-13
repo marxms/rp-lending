@@ -2,15 +2,13 @@ package com.rp.application.transport.http;
 
 import com.rp.application.representation.TransactionRepresentation;
 import com.rp.application.representation.TransferRepresentation;
+import com.rp.application.representation.WalletHistoryRepresentation;
 import com.rp.application.representation.WalletRepresentation;
 import com.rp.service.TransactionServiceImpl;
 import com.rp.service.TransferServiceImpl;
 import com.rp.service.WalletServiceImpl;
 import io.micronaut.http.HttpResponse;
-import io.micronaut.http.annotation.Body;
-import io.micronaut.http.annotation.Controller;
-import io.micronaut.http.annotation.Get;
-import io.micronaut.http.annotation.Post;
+import io.micronaut.http.annotation.*;
 import jakarta.inject.Inject;
 
 @Controller("/rp-lending-api/wallet")
@@ -36,6 +34,15 @@ public class WalletApiController {
             return HttpResponse.ok(result.get());
         }
         return HttpResponse.notFound();
+    }
+
+    @Get(uri = "/{walletKey}/history", produces = "application/json")
+    public HttpResponse<WalletHistoryRepresentation> getWalleHistoryByKey(@PathVariable String walletKey, @QueryValue int page, @QueryValue int size) {
+        var result = walletService.getWalletHistory(walletKey, page, size);
+        if (!result.getHistory().isEmpty()) {
+            return HttpResponse.ok(result);
+        }
+        return  HttpResponse.noContent();
     }
 
     @Post

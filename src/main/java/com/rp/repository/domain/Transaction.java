@@ -14,7 +14,7 @@ import java.math.BigDecimal;
 @Data
 public class Transaction {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(generator = "transaction_id_increment", strategy = GenerationType.AUTO)
     private Long id;
     @DateCreated
     private String createdAt;
