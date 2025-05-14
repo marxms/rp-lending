@@ -1,0 +1,20 @@
+micronaut:
+  server:
+    port: -1
+datasources:
+  default:
+    url: jdbc:tc:postgresql:12:///postgres
+    driver-class-name: org.testcontainers.jdbc.ContainerDatabaseDriver
+    username: 'postgres'
+    password: 'postgres'
+
+jpa:
+  default:
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: update
+        show_sql: true
+    entity-scan:
+      packages:
+        - com.rp.repository.domain

@@ -1,50 +1,60 @@
-## Micronaut 4.8.2 Documentation
+# RP Lending API
 
-- [User Guide](https://docs.micronaut.io/4.8.2/guide/index.html)
-- [API Reference](https://docs.micronaut.io/4.8.2/api/index.html)
-- [Configuration Reference](https://docs.micronaut.io/4.8.2/guide/configurationreference.html)
-- [Micronaut Guides](https://guides.micronaut.io/index.html)
+## Project Description
+**RP Lending API** is an application developed in **Java** using the **Micronaut** framework. The goal of the project is to provide a REST API to manage digital wallets, transactions, and financial transfers. The application uses a PostgreSQL database and is containerized with Docker.
+
 ---
 
-- [Micronaut Maven Plugin documentation](https://micronaut-projects.github.io/micronaut-maven-plugin/latest/)
-## Feature lombok documentation
+## Build Requirements
+- **Java 21** (JDK 21)
+- **Maven 3.9+**
+- **Docker** and **Docker Compose**
 
-- [Micronaut Project Lombok documentation](https://docs.micronaut.io/latest/guide/index.html#lombok)
+---
 
-- [https://projectlombok.org/features/all](https://projectlombok.org/features/all)
+## Main Endpoints
+### POST /rp-lending-api/wallet: Create a new wallet.
+### GET /rp-lending-api/wallet/{walletKey}: Retrieve a wallet by key.
+### GET /rp-lending-api/wallet/{walletKey}/history: Retrieve a wallet's balance history.
+### POST /rp-lending-api/wallet/transaction: Register a transaction.
+### POST /rp-lending-api/wallet/transfer: Perform a transfer.
+<hr></hr>
+Docker Containers  
+PostgreSQL: Main database.  
+Adminer: Database admin interface. (PORT: 8085)  
+RP Lending API: Main application.  
+<hr></hr>
 
+## Main Libraries Used
+- **Micronaut Framework**: Project foundation for building REST APIs.
+- **Hibernate JPA**: Persistence management and object-relational mapping.
+- **Testcontainers**: Integration testing with Docker containers.
+- **MapStruct**: Object mapping.
+- **PostgreSQL Driver**: Database connectivity for PostgreSQL.
+- **Logback**: Logging configuration.
+- **Lombok**: Reduces boilerplate code.
 
-## Feature micronaut-aot documentation
+---
 
-- [Micronaut AOT documentation](https://micronaut-projects.github.io/micronaut-aot/latest/guide/)
+## Build Tutorial
 
+### 1. Clone the Repository
+```bash
+git clone https://github.com/marxms/rp-lending-api.git
+cd rp-lending-api
+```
 
-## Feature jdbc-hikari documentation
+### 2. Set Up the Environment
+Make sure the following requirements are installed:
 
-- [Micronaut Hikari JDBC Connection Pool documentation](https://micronaut-projects.github.io/micronaut-sql/latest/guide/index.html#jdbc)
+- Java 21: Set the `JAVA_HOME` environment variable to point to JDK 21.
+- Maven: Verify installation with `mvn -v`.
+- Docker: Verify installation with `docker -v`.
 
+### 3. Run the Application
+Start the necessary services (PostgreSQL, Adminer, and the application) with the command:
 
-## Feature maven-enforcer-plugin documentation
-
-- [https://maven.apache.org/enforcer/maven-enforcer-plugin/](https://maven.apache.org/enforcer/maven-enforcer-plugin/)
-
-
-## Feature swagger-ui documentation
-
-- [Micronaut Swagger UI documentation](https://micronaut-projects.github.io/micronaut-openapi/latest/guide/index.html)
-
-- [https://swagger.io/tools/swagger-ui/](https://swagger.io/tools/swagger-ui/)
-
-
-## Feature openapi documentation
-
-- [Micronaut OpenAPI Support documentation](https://micronaut-projects.github.io/micronaut-openapi/latest/guide/index.html)
-
-- [https://www.openapis.org](https://www.openapis.org)
-
-
-## Feature test-resources documentation
-
-- [Micronaut Test Resources documentation](https://micronaut-projects.github.io/micronaut-test-resources/latest/guide/)
-
+```bash
+docker-compose up --build
+```
 

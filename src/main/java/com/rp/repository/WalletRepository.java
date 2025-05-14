@@ -19,8 +19,15 @@ package com.rp.repository;
 import com.rp.repository.domain.Wallet;
 import io.micronaut.data.annotation.Repository;
 import io.micronaut.data.repository.CrudRepository;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
+import org.hibernate.envers.AuditReader;
+import org.hibernate.envers.AuditReaderFactory;
+import org.hibernate.envers.query.AuditEntity;
 
-import java.math.BigDecimal;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -28,8 +35,26 @@ import java.util.Optional;
  * @author marxmenezes
  */
 @Repository
-public interface WalletRepository extends CrudRepository<Wallet, Long> {
-   Optional<Wallet> findByKey(String walletKey);
-   void updateBalanceByKey(String key, BigDecimal balance);
+@RequiredArgsConstructor
+public abstract class WalletRepository implements CrudRepository<Wallet, Long> {
 
+   @PersistenceContext
+   private final EntityManager entityManager;
+
+   public abstract Optional<Wallet> findByKey(String walletKey);
+
+
+
+   @SuppressWarnings("unchecked")
+   @Transactional(Transactional.TxType.NOT_SUPPORTED)
+   public List<Wallet> getWalletHistory(String walletKey, int page, int size) {
+      AuditReader auditReader = AuditReaderFactory.get(entityManager);
+      return auditReader.createQuery()
+              .forRevisionsOfEntity(Wallet.class, true, true)
+              .add(AuditEntity.property("key").eq(walletKey))
+              .addOrder(AuditEntity.revisionNumber().desc())
+              .setFirstResult(page * size)
+              .setMaxResults(size)
+              .getResultList();
+   }
 }

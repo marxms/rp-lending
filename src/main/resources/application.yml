@@ -14,8 +14,8 @@ datasources:
     db-type: postgres
     dialect: POSTGRES
     url: jdbc:postgresql://localhost:5432/rp-lending
-    username: ${DATASOURCES_DEFAULT_USERNAME}
-    password: ${DATASOURCES_DEFAULT_PASSWORD}
+    username: ${DATASOURCES_DEFAULT_USERNAME:postgres}
+    password: ${DATASOURCES_DEFAULT_PASSWORD:postgres}
     driver-class-name: org.postgresql.Driver
 jpa:
   default:
